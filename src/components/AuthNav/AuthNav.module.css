@@ -1,0 +1,16 @@
+.nav {
+    display: flex;
+    gap: 16px;
+  }
+  
+  .link {
+    text-decoration: none;
+    font-weight: 500;
+    color: #1f2937;
+  }
+  
+  .link:hover,
+  .link.active {
+    color: #2563eb;
+  }
+  
