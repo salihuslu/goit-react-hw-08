@@ -40,17 +40,6 @@ export const login = createAsyncThunk(
             return thunkAPI.rejectWithValue(error.response?.data?.message || error.message);
         }
     }
-    //     try {
-    //         console.log('Registering with credentials:', credentials); // test
-    //         const response = await axios.post('/users/login', credentials);
-    //         console.log('Register response:', response.data); // test
-    //         setAuthHeader(response.data.token);
-    //         return response.data;
-    //     } catch (error) {
-    //         console.error('Register error:', error.response?.data || error.message); // test
-    //         return thunkAPI.rejectWithValue(error.message);
-    //     }
-    // }
 );
 
 // Çıkış yap
