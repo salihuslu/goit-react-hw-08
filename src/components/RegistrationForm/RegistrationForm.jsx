@@ -2,8 +2,9 @@ import { useDispatch } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { register } from '../../redux/auth/operations';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import css from './RegistrationForm.module.css';
+import { toast } from 'react-hot-toast';
 
 const validationSchema = Yup.object().shape({
     name: Yup.string().min(2, 'Too short').max(50, 'Too long').required('Required'),
@@ -13,12 +14,18 @@ const validationSchema = Yup.object().shape({
 
 export default function RegistrationForm() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    const handleSubmit = (values, actions) => {
-        console.log('name:', values.name); // bunu da ekle
-        console.log('Registering with:', values);
-        dispatch(register(values));
-        actions.resetForm();
+    const handleSubmit = async (values, actions) => {
+        try {
+            await dispatch(register(values)).unwrap(); // ✅ unwrap ile reject yakalanır
+            toast.success('Registration successful! You can log in.');
+            actions.resetForm();
+            navigate('/login'); // ✅ Kayıt sonrası login'e yönlen
+        } catch (error) {
+            console.error(error);
+            toast.error('Registration failed! Try again.');
+        }
     };
 
     return (
