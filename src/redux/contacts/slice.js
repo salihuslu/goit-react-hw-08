@@ -1,6 +1,7 @@
 import { createSlice, isAnyOf, createSelector } from '@reduxjs/toolkit';
 import { fetchContacts, addContact, deleteContact } from './operations';
 import { selectNameFilter } from '../filters/slice';  // Bir üst dizine çıkıp filters/slice.js'yi import et
+import { logout } from '../auth/operations';
 
 const contactsSlice = createSlice({
     name: 'contacts',
@@ -25,6 +26,9 @@ const contactsSlice = createSlice({
                 state.items = state.items.filter(c => c.id !== action.payload);
                 state.loading = false;
                 state.error = null;
+            })
+            .addCase(logout.fulfilled, () => {
+                return []; // logout sonrası state’i temizle
             })
             .addMatcher(
                 isAnyOf(fetchContacts.pending, addContact.pending, deleteContact.pending),
