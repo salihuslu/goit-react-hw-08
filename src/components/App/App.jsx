@@ -6,16 +6,15 @@ import { selectIsRefreshing } from "../../redux/auth/selectors";
 
 import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-import Layout from "../Layout/Layout"; // çünkü Layout src/components/Layout/Layout.jsx içinde
+import Layout from "../Layout/Layout";
 import RestrictedRoute from '../RestrictedRoute/RestrictedRoute';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import { Toaster } from 'react-hot-toast';
 
-// lazy-loaded pages
 const Home = lazy(() => import("../../pages/Home/Home"));
 const Login = lazy(() => import("../../pages/Login/Login"));
 const Registration = lazy(() => import("../../pages/Registration/Registration"));
-const Contacts = lazy(() => import("../../pages/Contacts/Contacts")); // varsa
+const Contacts = lazy(() => import("../../pages/Contacts/Contacts"));
 
 export default function App() {
   const dispatch = useDispatch();
@@ -26,7 +25,7 @@ export default function App() {
   }, [dispatch]);
 
   if (isRefreshing) {
-    return <div>Refreshing user...</div>; // Sayfa yenilenirken kullanıcı yükleniyor
+    return <div>Refreshing user...</div>;
   }
 
   return (

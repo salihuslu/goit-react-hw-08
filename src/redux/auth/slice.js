@@ -15,10 +15,9 @@ const authSlice = createSlice({
     reducers: {},
     extraReducers: builder => {
         builder
-            // src/redux/auth/slice.js
+
             .addCase(register.fulfilled, (state, action) => {
-                // state.token = action.payload.token; // Bunu YAPMA
-                // Kullanıcıyı doğrudan login etme
+
                 state.user = { name: null, email: null };
                 state.token = null;
                 state.isLoggedIn = false;

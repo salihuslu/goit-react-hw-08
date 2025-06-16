@@ -18,10 +18,10 @@ export default function RegistrationForm() {
 
     const handleSubmit = async (values, actions) => {
         try {
-            await dispatch(register(values)).unwrap(); // ✅ unwrap ile reject yakalanır
+            await dispatch(register(values)).unwrap();
             toast.success('Registration successful! You can log in.');
             actions.resetForm();
-            navigate('/login'); // ✅ Kayıt sonrası login'e yönlen
+            navigate('/login');
         } catch (error) {
             console.error(error);
             toast.error('Registration failed! Try again.');
